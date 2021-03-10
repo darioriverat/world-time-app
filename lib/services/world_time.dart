@@ -7,6 +7,7 @@ class WorldTime {
   String location;
   String time;
   String zone;
+  bool isDayTime;
 
   Future<String> setTime(String location, String zone) async {
     this.location = location;
@@ -20,6 +21,13 @@ class WorldTime {
 
     DateTime now = DateTime.parse(datetime);
 
-    return time = DateFormat.jm().format(now);
+    time = DateFormat.jm().format(now);
+    setDayTime(now.hour);
+
+    return time;
+  }
+  
+  void setDayTime(int hour) {
+    isDayTime = hour > 6 && hour < 20 ? true : false;
   }
 }
